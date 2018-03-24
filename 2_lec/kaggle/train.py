@@ -88,7 +88,7 @@ def train(options):
 
     # данные для теста
     testset = cifar.CIFAR10(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=16,
+    testloader = DataLoader(testset, batch_size=64,
                                              shuffle=False, num_workers=2)
 
     # Создаем модель, нужно сделать иплементацию
