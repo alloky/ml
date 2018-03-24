@@ -107,7 +107,7 @@ def train(options):
     #criterion = nn.CrossEntropyLoss().cuda()
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
-    learning_rate = 1e-2
+    learning_rate = 1e-3
     optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-6, nesterov=True) # 
 
     start_from_epoch = 0
