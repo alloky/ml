@@ -23,9 +23,9 @@ class Net(nn.Module):
         self.net.add_module('do_4', nn.Dropout(0.3))
         
         
-        self.fc1 = nn.Linear(100*5*5, 400)
-        self.fc2 = nn.Linear(400, 84)
-        self.fc3 = nn.Linear(84, 10)
+        self.fc1 = nn.Linear(100*5*5, 800)
+        self.fc2 = nn.Linear(800, 400)
+        self.fc3 = nn.Linear(400, 10)
 
     def forward(self, x):
         x = self.net(x)
