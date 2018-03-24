@@ -37,7 +37,6 @@ def eval(options):
 
     # загружаем сеть
     cp_dic = torch.load(options.model)
-    print([*dict(options)])
     net.load_state_dict(cp_dic)
 
     transform_test = transforms.Compose([
@@ -76,7 +75,7 @@ def eval(options):
             class_total[label] += 1
 
         # печатаем для каждого класса вероятности
-        probs = softmax(outputs.data)
+        probs = softmax(outputs)
         for sid, sample in enumerate(probs.data):
             s = '%d' % ((bid * 16)+sid)
             for prob in sample:
