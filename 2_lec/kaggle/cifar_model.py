@@ -11,6 +11,7 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.net = nn.Sequential(nn.BatchNorm2d(3))
         self.net.add_module('conv_1', nn.Conv2d(3, 6, 5))
+        self.net.add_module('bn_1', nn.BatchNorm2d(6))
         self.net.add_module('relu_1', nn.ReLU())
         self.net.add_module('do_1', nn.Dropout(0.25))
         self.net.add_module('conv_2', nn.Conv2d(6, 16, 5))
