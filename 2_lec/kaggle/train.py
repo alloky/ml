@@ -39,7 +39,7 @@ def adjust_learning_rate(optimizer, epoch, base_lr):
     :param base_lr:    базовый коэффициент обучения
     :return: 
     """
-    lr = base_lr
+    lr = base_lr * (0.1 ** (epoch//3))
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return  lr
@@ -83,12 +83,12 @@ def train(options):
     # Dataset, shuffle = True - доступ рандомный
     # можно загружать данные в несколько потоков, если скорость загрузки
     # меньше чем скорость обновления сети
-    trainloader = DataLoader(trainset, batch_size=64,
+    trainloader = DataLoader(trainset, batch_size=16,
                                               shuffle=True, num_workers=2)
 
     # данные для теста
     testset = cifar.CIFAR10(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=64,
+    testloader = DataLoader(testset, batch_size=16,
                                              shuffle=False, num_workers=2)
 
     # Создаем модель, нужно сделать иплементацию
