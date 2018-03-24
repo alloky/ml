@@ -112,6 +112,7 @@ def train(options):
         start_from_epoch = cp_dic['epoch']
 
     print("Start train....")
+    prev_test_loss = 10000000
     for epoch in range(start_from_epoch, options.epoch):
         train_loss = 0.0
 
@@ -189,13 +190,19 @@ def train(options):
         writer.add_scalar('loss/epoch_lr', epoch_lr, epoch)
 
         # сохраняем модель каждые 2 итерации
-        if epoch %2 ==0:
+        if epoch %5 ==0:
             torch.save({
                     'epoch': epoch + 1,
                     'net': net.state_dict(),
                     'optimizer': optimizer.state_dict()
                 }, options.model + '_chekpoint_%03d.pth'%epoch )
 
+        if(test_loss > prev_test_loss):
+            break
+        prev_test_loss = test_loss
+        print("-------------------------------")
+        print("test_loss: " + str(prev_test_loss))
+        print("-------------------------------")
     # сохраняем финальную модель
     torch.save(net.state_dict(), options.model + '.pth')
 
