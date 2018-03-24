@@ -95,6 +95,6 @@ def eval(options):
 if __name__ == '__main__':
     (options, args) = parser.parse_args()
     if options.model is None or not os.path.exists( options.model ):
-        print ('Model file does not exist or empty')
+        print ('Model file does not exist or empty', options.model)
         exit(1)
     eval(options)
