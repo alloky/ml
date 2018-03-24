@@ -30,7 +30,7 @@ parser.add_option("-l", "--log", dest="log", type='string', default='./log',
                   help="Path to tensorboard log")   # куда складывать лог tensorboard
 
 
-def adjust_learning_rate(optimizer, epoch, base_lr):
+def adjust_learning_rate(optimizer, epoch, base_lr, loss_diff):
     """
      Реализует политику уменьшения коэффициента обучения 
      в зависимости от номера эпохи
@@ -39,7 +39,9 @@ def adjust_learning_rate(optimizer, epoch, base_lr):
     :param base_lr:    базовый коэффициент обучения
     :return: 
     """
-    lr = base_lr * (0.1 ** (epoch//3))
+    lr = base_lr * (0.1 ** (epoch//6))
+    if (loss_diff < 0.1):
+        lr*=20
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return  lr
@@ -77,7 +79,11 @@ def train(options):
     # Загружаем данные, если данных еще нет, то нужно указать флаг download=True
     # torchvision реализует Dataset для CIFAR, MNIST, ImageNet...
     print("Loading data....")
-    trainset = cifar.CIFAR10(options.input, download=True, train=True, transform=transform)
+    trainset = cifar.CIFAR10(options.input, download=True, train=True, transform=transforms.Compose(
+        [ tools.RandomHorizontalFlip(), 
+          tools.RandomVerticallFlip(), 
+          tools.ToTensor(), 
+          tools.Normalize(mean = mean_tr, std = std_tr), ]))
 
     # теперь можно использовать DataLoader для доступа к данным
     # Dataset, shuffle = True - доступ рандомный
@@ -113,11 +119,12 @@ def train(options):
 
     print("Start train....")
     prev_test_loss = 10000000
+    prev_loss_diff = 0
     for epoch in range(start_from_epoch, options.epoch):
         train_loss = 0.0
 
         # делаем что то с коэффициентом обучения
-        epoch_lr = adjust_learning_rate(optimizer, epoch, base_lr)
+        epoch_lr = adjust_learning_rate(optimizer, epoch, base_lr, prev_loss_diff)
 
         print ('Train epoch: ', epoch)
         net.train(True)
@@ -197,8 +204,7 @@ def train(options):
                     'optimizer': optimizer.state_dict()
                 }, options.model + '_chekpoint_%03d.pth'%epoch )
 
-        if(test_loss > prev_test_loss):
-            break
+        prev_loss_diff = prev_test_loss - test_loss
         prev_test_loss = test_loss
         print("-------------------------------")
         print("test_loss: " + str(prev_test_loss))
