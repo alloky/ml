@@ -12,16 +12,9 @@ class Net(nn.Module):
         self.net = nn.Sequential(nn.BatchNorm2d(3))
         self.net.add_module('conv_1', nn.Conv2d(3, 6, 5))
         self.net.add_module('relu_1', nn.ReLU())
-        self.net.add_module('conv_2', nn.Conv2d(6, 10, 5))
+        self.net.add_module('conv_2', nn.Conv2d(6, 16, 5))
         self.net.add_module('pool_1', nn.MaxPool2d(2, 2))
         self.net.add_module('do_1', nn.Dropout(0.25))
-
-        self.net.add_module('conv_3', nn.Conv2d(10, 12, 5))
-        self.net.add_module('relu_2', nn.ReLU())
-        self.net.add_module('conv_4', nn.Conv2d(12, 14, 5))
-        self.net.add_module('pool_2', nn.MaxPool2d(2, 2))
-        self.net.add_module('do_2', nn.Dropout(0.5))
-        self.net.add_module('conv_5', nn.Conv2d(14, 16, 5))
 
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
