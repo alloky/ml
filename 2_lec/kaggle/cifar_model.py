@@ -12,8 +12,6 @@ class Net(nn.Module):
         self.net = nn.Sequential(nn.BatchNorm2d(3))
         self.net.add_module('conv_1', nn.Conv2d(3, 32, 5))
         self.net.add_module('relu_1', nn.ReLU())
-        self.net.add_module('conv_2', nn.Conv2d(32, 32, 5))
-        self.net.add_module('relu_2', nn.ReLU())
         self.net.add_module('pool_1', nn.MaxPool2d(15, 15))
         self.net.add_module('do_2', nn.Dropout(0.3))
         self.net.add_module('conv_3', nn.Conv2d(32, 64, 5))
