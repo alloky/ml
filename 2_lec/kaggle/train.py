@@ -83,7 +83,7 @@ def train(options):
     # Dataset, shuffle = True - доступ рандомный
     # можно загружать данные в несколько потоков, если скорость загрузки
     # меньше чем скорость обновления сети
-    trainloader = DataLoader(trainset, batch_size=16,
+    trainloader = DataLoader(trainset, batch_size=64,
                                               shuffle=True, num_workers=2)
 
     # данные для теста
