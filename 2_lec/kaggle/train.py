@@ -106,7 +106,7 @@ def train(options):
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
     learning_rate = 1e-2
-    optimizer = torch.optim.ASGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-6) # 
+    optimizer = torch.optim.ASGD(net.parameters(), lr=learning_rate, weight_decay=1e-6) # 
 
     start_from_epoch = 0
     # Если указан чекпойнт то загружаем сеть
