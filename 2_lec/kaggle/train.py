@@ -39,7 +39,7 @@ def adjust_learning_rate(optimizer, epoch, base_lr, loss_diff):
     :param base_lr:    базовый коэффициент обучения
     :return: 
     """
-    lr = base_lr * (0.1 ** (epoch//7))
+    lr = base_lr
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return  lr
@@ -50,7 +50,7 @@ def train(options):
     :param options: 
     :return: 
     """
-    base_lr = 0.001 # задаем базовый коэффициент обучения
+    base_lr = 0.01 # задаем базовый коэффициент обучения
     # список классов  cifar 10
     classes = ('plane', 'car', 'bird', 'cat',
                'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -105,8 +105,8 @@ def train(options):
     #criterion = nn.CrossEntropyLoss().cuda()
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
-    learning_rate = 1e-3
-    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-6, nesterov=True) # 
+    learning_rate = 1e-2
+    optimizer = torch.optim.ASGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-6) # 
 
     start_from_epoch = 0
     # Если указан чекпойнт то загружаем сеть
