@@ -100,8 +100,8 @@ def train(options):
     #criterion = nn.CrossEntropyLoss().cuda()
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
-    learning_rate = 1e-4
-    optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate) # 
+    learning_rate = 1e-2
+    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9) # 
 
     start_from_epoch = 0
     # Если указан чекпойнт то загружаем сеть
