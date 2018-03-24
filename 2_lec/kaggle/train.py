@@ -39,7 +39,7 @@ def adjust_learning_rate(optimizer, epoch, base_lr, loss_diff):
     :param base_lr:    базовый коэффициент обучения
     :return: 
     """
-    lr = base_lr
+    lr = base_lr*(0.1**(epoch//5))
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return  lr
@@ -88,12 +88,12 @@ def train(options):
     # Dataset, shuffle = True - доступ рандомный
     # можно загружать данные в несколько потоков, если скорость загрузки
     # меньше чем скорость обновления сети
-    trainloader = DataLoader(trainset, batch_size=16,
+    trainloader = DataLoader(trainset, batch_size=64,
                                               shuffle=True, num_workers=2)
 
     # данные для теста
     testset = cifar.CIFAR10(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=16,
+    testloader = DataLoader(testset, batch_size=64,
                                              shuffle=False, num_workers=2)
 
     # Создаем модель, нужно сделать иплементацию
@@ -105,8 +105,8 @@ def train(options):
     #criterion = nn.CrossEntropyLoss().cuda()
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
-    learning_rate = 1e-2
-    optimizer = torch.optim.ASGD(net.parameters(), lr=learning_rate, weight_decay=1e-6) # 
+    learning_rate = 1
+    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, weight_decay=5e-4) # 
 
     start_from_epoch = 0
     # Если указан чекпойнт то загружаем сеть
