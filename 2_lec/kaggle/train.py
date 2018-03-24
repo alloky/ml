@@ -77,7 +77,7 @@ def train(options):
     # Загружаем данные, если данных еще нет, то нужно указать флаг download=True
     # torchvision реализует Dataset для CIFAR, MNIST, ImageNet...
     print("Loading data....")
-    trainset = cifar.CIFAR10(options.input,train=True, transform=transform)
+    trainset = cifar.CIFAR10(options.input, download=True, train=True, transform=transform)
 
     # теперь можно использовать DataLoader для доступа к данным
     # Dataset, shuffle = True - доступ рандомный
