@@ -66,11 +66,11 @@ def train(options):
     # https://www.programcreek.com/python/example/104832/torchvision.transforms.Compose
     transform = transforms.Compose(
         [   
-            transforms.ToTensor(),
             transforms.RandomHorizontalFlip(),
             transforms.RandomRotation(240), 
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(60),
+            transforms.ToTensor(),
             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)), #нормализация данных
             ])
 
