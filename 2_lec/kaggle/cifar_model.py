@@ -22,7 +22,7 @@ class Net(nn.Module):
         self.net.add_module('pool_2', nn.MaxPool2d(2, 2))
         self.net.add_module('relu_3', nn.ReLU())
         self.net.add_module('do_4', nn.Dropout(0.5))
-        self.net.add_module('Linear1', nn.view(32))
+        self.net.add_module('Linear1', nn.View(32))
         self.net.add_module('Linear', nn.Linear(32,16))
         
         
