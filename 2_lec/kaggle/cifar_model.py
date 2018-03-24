@@ -23,7 +23,7 @@ class Net(nn.Module):
         self.net.add_module('do_4', nn.Dropout(0.3))
         
         
-        self.fc1 = nn.Linear(100*13*13, 400)
+        self.fc1 = nn.Linear(100*5*5, 400)
         self.fc2 = nn.Linear(400, 84)
         self.fc3 = nn.Linear(84, 10)
 
