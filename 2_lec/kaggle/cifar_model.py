@@ -21,7 +21,7 @@ class Net(nn.Module):
         self.net.add_module('conv_4', nn.Conv2d(64, 128, 5))
         self.net.add_module('pool_2', nn.MaxPool2d(2, 2))
         self.net.add_module('do_2', nn.Dropout(0.5))
-        self.net.add_module('conv_5', nn.Conv2d(64, 16, 5))
+        self.net.add_module('conv_5', nn.Conv2d(128, 16, 5))
 
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
