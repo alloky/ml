@@ -37,7 +37,7 @@ def eval(options):
 
     # загружаем сеть
     cp_dic = torch.load(options.model)
-    print([*options])
+    print([*dict(options)])
     net.load_state_dict(cp_dic)
 
     transform_test = transforms.Compose([
