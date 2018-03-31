@@ -11,14 +11,14 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.net = nn.Sequential(nn.BatchNorm2d(1))
 
-        self.net.add_module('L1', nn.Linear(3*28*28,588))       
+        self.net.add_module('L1', nn.Linear(64*28*28,2*588))       
         self.net.add_module('sf_1', nn.Sigmoid())
         
-        self.net.add_module('L2', nn.Linear(588,244))       
+        self.net.add_module('L2', nn.Linear(2*588,588))       
         self.net.add_module('relu_2', nn.ReLU())
 
 
-        self.net.add_module('L3', nn.Linear(244,122))       
+        self.net.add_module('L3', nn.Linear(588,122))       
         self.net.add_module('relu_3', nn.ReLU())
 
 
