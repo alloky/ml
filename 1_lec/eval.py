@@ -78,25 +78,23 @@ def eval(options):
 
     flag = True
     for bid, data in tqdm(enumerate(testloader, 0), total=len(testloader)):
-        inputs, labels = data
+        inputs = data
 
         # получаем переменные Variable
-        inputs, labels = Variable(inputs, volatile=True).cuda(), Variable(labels, volatile=True).cuda()
+        inputs = Variable(inputs, volatile=True).cuda()
         outputs = net(inputs)
-        if(flag):
-            print(inputs[0][0])
-            flag = False
+        
         # считаем ошибку
-        loss = criterion(outputs, labels)
-        test_loss += loss.data[0]
-        # считаем какие классы мы предсказали и сохраняем для
+        # loss = criterion(outputs, labels)
+        # test_loss += loss.data[0]
+        # # считаем какие классы мы предсказали и сохраняем для
         # последующего расчета accuracy
-        _, predicted = torch.max(outputs.data, 1)
-        c = (predicted == labels.data).squeeze()
-        for i in range(outputs.size(0)):
-            label = labels.data[i]
-            class_correct[label] += c[i]
-            class_total[label] += 1
+        # _, predicted = torch.max(outputs.data, 1)
+        # c = (predicted == labels.data).squeeze()
+        # for i in range(outputs.size(0)):
+        #     label = labels.data[i]
+        #     class_correct[label] += c[i]
+        #     class_total[label] += 1
 
         # печатаем для каждого класса вероятности
         probs = softmax(outputs)
@@ -106,15 +104,15 @@ def eval(options):
                 s += ',%f'%prob
             print(s, file=ofile)
 
-    test_loss /= len(testloader)
+    # test_loss /= len(testloader)
     # расчитываем accuracy
-    accuracy = {}
-    avg_accuracy = 0
-    for i in range(10):
-        accuracy[classes[i]] = 100 * class_correct[i] / class_total[i]
-        avg_accuracy += accuracy[classes[i]]
+    # accuracy = {}
+    # avg_accuracy = 0
+    # for i in range(10):
+    #     accuracy[classes[i]] = 100 * class_correct[i] / class_total[i]
+    #     avg_accuracy += accuracy[classes[i]]
 
-    print("Final cross entropy loss: %0.5f"%test_loss, "Final accuracy: %0.3f"%(avg_accuracy/10) )
+    # print("Final cross entropy loss: %0.5f"%test_loss, "Final accuracy: %0.3f"%(avg_accuracy/10) )
 
 if __name__ == '__main__':
     (options, args) = parser.parse_args()
