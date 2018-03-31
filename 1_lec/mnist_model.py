@@ -9,11 +9,11 @@ class Net(nn.Module):
     # Слои, в которых нет параметров для обучения можно не создавать, а брать из переменной F
     def __init__(self):
         super(Net, self).__init__()
-        self.net = nn.Sequential(nn.Linear(64*28*28,2*588))
+        self.net = nn.Sequential(nn.Linear(28*28,588))
  
         self.net.add_module('sf_1', nn.Sigmoid())
         
-        self.net.add_module('L2', nn.Linear(2*588,588))       
+        self.net.add_module('L2', nn.Linear(588,588))       
         self.net.add_module('relu_2', nn.ReLU())
 
 
@@ -28,6 +28,6 @@ class Net(nn.Module):
         self.net.add_module('L5', nn.Linear(61,10))       
         
     def forward(self, x):
-        x = x.view(64*28*28)
+        x = x.view(-1,28*28)
         x = self.net(x)
         return F.log_softmax(x, 1)
