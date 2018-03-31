@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 from torchvision.datasets import cifar
 import torchvision.transforms as transforms
 import os
-from cifar_model import Net
+from mnist_model import Net
 import torch.optim as optim
 from torch.autograd import Variable
 from tensorboardX import SummaryWriter
@@ -68,7 +68,6 @@ def train(options):
             transforms.RandomRotation(240), 
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(60),
-            transforms.ColorJitter(),
             transforms.ToTensor(),
             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)), #нормализация данных
             ])
@@ -82,7 +81,7 @@ def train(options):
     # Загружаем данные, если данных еще нет, то нужно указать флаг download=True
     # torchvision реализует Dataset для CIFAR, MNIST, ImageNet...
     print("Loading data....")
-    trainset = cifar.CIFAR10(options.input, download=True, train=True, transform=transform)
+    trainset = cifar.MNIST(options.input, download=True, train=True, transform=transform)
 
     # теперь можно использовать DataLoader для доступа к данным
     # Dataset, shuffle = True - доступ рандомный
@@ -92,7 +91,7 @@ def train(options):
                                               shuffle=True, num_workers=2)
 
     # данные для теста
-    testset = cifar.CIFAR10(options.input, train=False, transform=transform_test)
+    testset = cifar.MNIST(options.input, train=False, transform=transform_test)
     testloader = DataLoader(testset, batch_size=64,
                                              shuffle=False, num_workers=2)
 

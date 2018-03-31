@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.nn.functional import softmax
 from torch.autograd import Variable
-from cifar_model import Net
+from mnist_model import Net
 from optparse import OptionParser
 from torch.utils.data import DataLoader
 from torchvision.datasets import cifar
