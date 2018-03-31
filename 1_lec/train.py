@@ -64,10 +64,10 @@ def train(options):
     # https://www.programcreek.com/python/example/104832/torchvision.transforms.Compose
     transform = transforms.Compose(
         [   
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(240), 
-            transforms.RandomVerticalFlip(),
-            transforms.RandomRotation(60),
+            # transforms.RandomHorizontalFlip(),
+            # transforms.RandomRotation(240), 
+            # transforms.RandomVerticalFlip(),
+            # transforms.RandomRotation(60),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225]), #нормализация данных
