@@ -68,7 +68,7 @@ def eval(options):
         for j in range(28):
             for k in range(28):
                 p_test_[i][0][j][k] /= 255
-        p_test_[i][0] = transform_test(p_test[i][0])
+        p_test_[i][0] = transform_test(p_test_[i][0])
     return
     testloader = DataLoader(p_test_, batch_size=16,
                                              shuffle=False, num_workers=2)
