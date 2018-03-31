@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torchvision.datasets import cifar
+from torchvision.datasets import mnist
 import torchvision.transforms as transforms
 import os
 from mnist_model import Net
@@ -81,7 +81,7 @@ def train(options):
     # Загружаем данные, если данных еще нет, то нужно указать флаг download=True
     # torchvision реализует Dataset для CIFAR, MNIST, ImageNet...
     print("Loading data....")
-    trainset = cifar.MNIST(options.input, download=True, train=True, transform=transform)
+    trainset = mnist.MNIST(options.input, download=True, train=True, transform=transform)
 
     # теперь можно использовать DataLoader для доступа к данным
     # Dataset, shuffle = True - доступ рандомный
@@ -91,7 +91,7 @@ def train(options):
                                               shuffle=True, num_workers=2)
 
     # данные для теста
-    testset = cifar.MNIST(options.input, train=False, transform=transform_test)
+    testset = mnist.MNIST(options.input, train=False, transform=transform_test)
     testloader = DataLoader(testset, batch_size=64,
                                              shuffle=False, num_workers=2)
 
