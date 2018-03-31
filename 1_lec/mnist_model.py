@@ -26,9 +26,8 @@ class Net(nn.Module):
 
 
         self.net.add_module('L5', nn.Linear(61,10))       
-        self.net.add_module('sf_5', nn.Softmax())
-
+        
     def forward(self, x):
         x = x.view(64*28*28)
         x = self.net(x)
-        return x
+        return F.log_softmax(x, 1)
