@@ -67,7 +67,7 @@ def eval(options):
     ofile = open(options.out, 'w')
     print("id,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9", file=ofile)
 
-    flag = true
+    flag = True
     for bid, data in tqdm(enumerate(testloader, 0), total=len(testloader)):
         inputs, labels = data
 
@@ -76,7 +76,7 @@ def eval(options):
         outputs = net(inputs)
         if(flag):
             print(outputs[0][0])
-            flag = false
+            flag = False
         # считаем ошибку
         loss = criterion(outputs, labels)
         test_loss += loss.data[0]
