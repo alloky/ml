@@ -11,6 +11,14 @@ from torchvision.datasets import mnist
 import torchvision.transforms as transforms
 from tqdm import *
 
+import random
+from sklearn.model_selection import train_test_split
+import numpy as np
+import scipy.ndimage as ndi
+import matplotlib.pylab as plt
+from sklearn.datasets import fetch_mldata
+   
+
 # разбираем аргументы коммандной строки
 parser = OptionParser("Train cifar10 neural network")
 
@@ -48,13 +56,7 @@ def eval(options):
     ])
 
     # данные для теста
-
-    mnist_train = {'data': X_train, 'target': Y_train}
-    mnist_test = {'data': X_test}
-
-    with open('./mnist_train.pkl', 'wb') as f:
-        pickle.dump(mnist_train, f)
-        
+       
     testset = mnist.MNIST(options.input, train=False, transform=transform_test)
     testloader = DataLoader(mnist_train, batch_size=16,
                                              shuffle=False, num_workers=2)
@@ -65,13 +67,16 @@ def eval(options):
     ofile = open(options.out, 'w')
     print("id,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9", file=ofile)
 
+    flag = true
     for bid, data in tqdm(enumerate(testloader, 0), total=len(testloader)):
         inputs, labels = data
 
         # получаем переменные Variable
         inputs, labels = Variable(inputs, volatile=True).cuda(), Variable(labels, volatile=True).cuda()
         outputs = net(inputs)
-
+        if(flag):
+            print(outputs[0][0])
+            flag = false
         # считаем ошибку
         loss = criterion(outputs, labels)
         test_loss += loss.data[0]
