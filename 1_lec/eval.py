@@ -58,6 +58,7 @@ def eval(options):
     # данные для теста
        
     testset = mnist.MNIST(options.input, train=False, transform=transform_test)
+    print(testset[0])
     testloader = DataLoader(testset, batch_size=16,
                                              shuffle=False, num_workers=2)
 
