@@ -9,7 +9,7 @@ class Net(nn.Module):
     # Слои, в которых нет параметров для обучения можно не создавать, а брать из переменной F
     def __init__(self):
         super(Net, self).__init__()
-        self.net = nn.Sequential(nn.Linear(28*28,2*588))
+        self.net = nn.Sequential(nn.Linear(64*28*28,2*588))
  
         self.net.add_module('sf_1', nn.Sigmoid())
         
