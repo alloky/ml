@@ -60,8 +60,8 @@ def eval(options):
     p_test = pickle.load(open("mnist_test.pkl","rb"))['data']
 
 
-    print(p_test[0])
-    print(transform_test(p_test[0][0]))
+    print(p_test[0].view(28,28).unsqueeze(1))
+    print(transform_test(p_test[0]))
     # for i in range(len(p_test)):
     #     p_test[i][0] = transform_test(p_test[i][0])
     return
