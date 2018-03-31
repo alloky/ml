@@ -62,9 +62,9 @@ def eval(options):
 
     # print(torch.FloatTensor(p_test[0]).view(28,28).unsqueeze(0))
     # print(transform_test(p_test[0]))
-    p_test_ = torch.FloatTensor()
+    p_test_ = torch.FloatTensor(len(p_test), 1, 28, 28)
     for i in range(len(p_test)):
-        p_test_.append(torch.FloatTensor(p_test[i]).view(28,28).unsqueeze(0))
+        p_test_[i] = torch.FloatTensor(p_test[i]).view(28,28).unsqueeze(0)
         for j in range(28):
             for k in range(28):
                 p_test_[i][0][j][k] /= 255
