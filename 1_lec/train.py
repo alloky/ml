@@ -89,12 +89,12 @@ def train(options):
     # Dataset, shuffle = True - доступ рандомный
     # можно загружать данные в несколько потоков, если скорость загрузки
     # меньше чем скорость обновления сети
-    trainloader = DataLoader(trainset, batch_size=64,
+    trainloader = DataLoader(trainset, batch_size=32,
                                               shuffle=True, num_workers=2)
 
     # данные для теста
     testset = mnist.MNIST(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=64,
+    testloader = DataLoader(testset, batch_size=32,
                                              shuffle=False, num_workers=2)
 
     # Создаем модель, нужно сделать иплементацию

@@ -18,6 +18,8 @@ class Net(nn.Module):
 
 
         self.net.add_module('L3', nn.Linear(588,122))       
+        self.net.add_module('sf_2', nn.Sigmoid())
+
         self.net.add_module('relu_3', nn.ReLU())
 
 
