@@ -41,19 +41,21 @@ def eval(options):
 
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+       transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]) #нормализация данных
+            
     ])
 
     # данные для теста
     testset = mnist.MNIST(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=32,
+    testloader = DataLoader(testset, batch_size=16,
                                              shuffle=False, num_workers=2)
 
     test_loss = 0
     print('Test model: ')
 
     ofile = open(options.out, 'w')
-    print("id,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9", file=ofile)
+    print("id,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9", file=ofile)
 
     for bid, data in tqdm(enumerate(testloader, 0), total=len(testloader)):
         inputs, labels = data
