@@ -51,16 +51,18 @@ def eval(options):
     transform_test = transforms.Compose([
        transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225]) #нормализация данных
-            
     ])
 
     # данные для теста
-       
+
     testset = mnist.MNIST(options.input, train=False, transform=transforms.ToTensor())
-    print(testset[0])
-    print(transform_test(testset[0][0]))
+    
+    p_test = pickle.load(open("mnist_test.pkl","rb"))
+
+    for i in range(len(p_test)):
+        p_test[i][0] = transform_test(testset[i][0])
     return
-    testloader = DataLoader(testset, batch_size=16,
+    testloader = DataLoader(p_test, batch_size=16,
                                              shuffle=False, num_workers=2)
 
     test_loss = 0
