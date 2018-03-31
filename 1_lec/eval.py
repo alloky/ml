@@ -57,8 +57,10 @@ def eval(options):
 
     # данные для теста
        
-    testset = mnist.MNIST(options.input, train=False, transform=transform_test)
+    testset = mnist.MNIST(options.input, train=False, transform=transforms.ToTensor())
     print(testset[0])
+    print(transform_test(testset[0]))
+    return
     testloader = DataLoader(testset, batch_size=16,
                                              shuffle=False, num_workers=2)
 
