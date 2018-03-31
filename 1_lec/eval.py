@@ -75,7 +75,7 @@ def eval(options):
         inputs, labels = Variable(inputs, volatile=True).cuda(), Variable(labels, volatile=True).cuda()
         outputs = net(inputs)
         if(flag):
-            print(inputs)
+            print(inputs[0][0])
             flag = False
         # считаем ошибку
         loss = criterion(outputs, labels)
