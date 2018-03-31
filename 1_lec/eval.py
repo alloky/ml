@@ -6,7 +6,7 @@ from torch.autograd import Variable
 from mnist_model import Net
 from optparse import OptionParser
 from torch.utils.data import DataLoader
-from torchvision.datasets import cifar
+from torchvision.datasets import mnist
 import torchvision.transforms as transforms
 from tqdm import *
 
@@ -45,8 +45,8 @@ def eval(options):
     ])
 
     # данные для теста
-    testset = cifar.CIFAR10(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=16,
+    testset = mnist.MNIST(options.input, train=False, transform=transform_test)
+    testloader = DataLoader(testset, batch_size=32,
                                              shuffle=False, num_workers=2)
 
     test_loss = 0
