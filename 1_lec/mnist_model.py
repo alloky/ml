@@ -11,7 +11,7 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.net = nn.Sequential(nn.BatchNorm2d(1))
 
-        self.net.add_module('L1', nn.Linear(28*28,2*588))       
+        self.net.add_module('L1', nn.Linear(64*28*28,2*588))       
         self.net.add_module('sf_1', nn.Sigmoid())
         
         self.net.add_module('L2', nn.Linear(2*588,588))       
@@ -30,6 +30,6 @@ class Net(nn.Module):
         self.net.add_module('sf_5', nn.Softmax())
 
     def forward(self, x):
-        print(x.shape)
+        x.view(64*28*28)
         x = self.net(x)
         return x
