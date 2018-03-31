@@ -57,10 +57,10 @@ def eval(options):
 
     testset = mnist.MNIST(options.input, train=False, transform=transforms.ToTensor())
     
-    p_test = pickle.load(open("mnist_test.pkl","rb"))
+    p_test = pickle.load(open("mnist_test.pkl","rb"))['data']
 
     for i in range(len(p_test)):
-        p_test[i] = transform_test(p_test[i])
+        p_test[i][0] = transform_test(p_test[i][0])
     return
     testloader = DataLoader(p_test, batch_size=16,
                                              shuffle=False, num_workers=2)
