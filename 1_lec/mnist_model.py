@@ -30,6 +30,6 @@ class Net(nn.Module):
         self.net.add_module('sf_5', nn.Softmax())
 
     def forward(self, x):
-        print(x.shape())
+        print(x.shape)
         x = self.net(x)
         return x
