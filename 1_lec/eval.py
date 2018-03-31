@@ -67,7 +67,7 @@ def eval(options):
         p_test_.append(torch.FloatTensor(p_test[i]).view(28,28).unsqueeze(0))
         for j in range(28):
             for k in range(28):
-                p_test-[i][0][j][k] /= 255
+                p_test_[i][0][j][k] /= 255
         p_test_[i][0] = transform_test(p_test[i][0])
     return
     testloader = DataLoader(p_test_, batch_size=16,
