@@ -60,7 +60,7 @@ def eval(options):
     p_test = pickle.load(open("mnist_test.pkl","rb"))
 
     for i in range(len(p_test)):
-        p_test[i][0] = transform_test(p_test[i][0])
+        p_test[i] = transform_test(p_test[i])
     return
     testloader = DataLoader(p_test, batch_size=16,
                                              shuffle=False, num_workers=2)
