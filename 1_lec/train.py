@@ -39,7 +39,7 @@ def adjust_learning_rate(optimizer, epoch, base_lr, loss_diff):
     :param base_lr:    базовый коэффициент обучения
     :return: 
     """
-    lr = base_lr*(0.1**(epoch//5))
+    lr = base_lr*(0.6**(epoch//5))
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return  lr
@@ -105,7 +105,7 @@ def train(options):
     criterion = nn.CrossEntropyLoss()
     # тут создаем оптимайзер, который нужен
     learning_rate = 1
-    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, weight_decay=5e-4) # 
+    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, weight_decay=5e-3) # 
 
     start_from_epoch = 0
     # Если указан чекпойнт то загружаем сеть
