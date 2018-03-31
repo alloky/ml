@@ -1,6 +1,7 @@
 import os
 import torch
 import torch.nn as nn
+import pickle
 from torch.nn.functional import softmax
 from torch.autograd import Variable
 from mnist_model import Net
@@ -47,8 +48,15 @@ def eval(options):
     ])
 
     # данные для теста
+
+    mnist_train = {'data': X_train, 'target': Y_train}
+    mnist_test = {'data': X_test}
+
+    with open('./mnist_train.pkl', 'wb') as f:
+        pickle.dump(mnist_train, f)
+        
     testset = mnist.MNIST(options.input, train=False, transform=transform_test)
-    testloader = DataLoader(testset, batch_size=16,
+    testloader = DataLoader(mnist_train, batch_size=16,
                                              shuffle=False, num_workers=2)
 
     test_loss = 0
