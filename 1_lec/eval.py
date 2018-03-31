@@ -60,7 +60,7 @@ def eval(options):
     p_test = pickle.load(open("mnist_test.pkl","rb"))['data']
 
 
-    print(pytorch.FloatTensor(p_test[0]))
+    print(torch.FloatTensor(p_test[0]))
     print(transform_test(p_test[0]))
     # for i in range(len(p_test)):
     #     p_test[i][0] = transform_test(p_test[i][0])
